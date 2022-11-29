@@ -11,4 +11,7 @@ const [input, module] = await Promise.all([
   import(`./src/${inputFileName}.ts`),
 ]);
 
-await module.solve(input, part);
+const output = await module.solve(input, part);
+
+console.log("Got output:");
+console.log(output);
