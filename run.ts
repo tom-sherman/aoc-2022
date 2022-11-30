@@ -57,5 +57,6 @@ if (shouldCheck) {
   );
 
   console.log(bold("Got solution response:"));
-  console.log(solutionResponse);
+  console.log(`status=${solutionResponse.status}`);
+  console.log(solutionResponse.infoText);
 }
