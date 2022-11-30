@@ -40,7 +40,7 @@ export class AocApi {
     }
 
     await cache.put(url, response.clone());
-    return await response.text();
+    return response.text();
   }
 
   async sendSolution(day: number, part: "1" | "2", solution: string): Promise<
