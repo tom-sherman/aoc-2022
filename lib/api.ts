@@ -43,7 +43,7 @@ export class AocApi {
     return await response.text();
   }
 
-  async sendSolution(day: number, part: 1 | 2, solution: string): Promise<
+  async sendSolution(day: number, part: "1" | "2", solution: string): Promise<
     {
       infoText: string;
       status: SolutionResponseStatus;

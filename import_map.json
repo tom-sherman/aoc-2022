@@ -3,6 +3,7 @@
     "std/": "https://deno.land/std@0.166.0/",
     "lib/": "./lib/",
     "deno_dom/": "https://deno.land/x/deno_dom@v0.1.36-alpha/",
-    "dotenv/": "https://deno.land/x/dotenv@v3.2.0/"
+    "dotenv/": "https://deno.land/x/dotenv@v3.2.0/",
+    "clay/": "https://deno.land/x/clay@v0.2.5/"
   }
 }

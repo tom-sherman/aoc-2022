@@ -1,6 +1,7 @@
 import { AocApi } from "lib/api.ts";
-import { bold } from "std/fmt/colors.ts";
+import { bold, italic } from "std/fmt/colors.ts";
 import { config } from "dotenv/mod.ts";
+import { choice, Command, number as numberArgument } from "clay/mod.ts";
 
 const { AOC_TOKEN } = config();
 
@@ -9,30 +10,26 @@ if (!AOC_TOKEN) {
   Deno.exit(1);
 }
 
-const [dayInput, partInput] = Deno.args[0]?.split(":") ?? [];
+const cmd = new Command("Run Advent of Code solutions")
+  .required(numberArgument, "day")
+  .optional(choice<("1" | "2")[]>("PART", ["1", "2"]), "part")
+  .flag("auto-submit", { aliases: ["submit"] });
 
-const day = parseInt(dayInput!);
-const part = parseInt(partInput!);
-
-if (isNaN(day)) {
-  throw new Error("Missing day");
-}
-
-if (isNaN(part) || part !== 1 && part !== 2) {
-  throw new Error(`Missing part (1 or 2) received ${partInput}`);
-}
+const args = cmd.run();
 
 const api = new AocApi(
   "https://adventofcode.com/2020/",
   AOC_TOKEN,
 );
 
-const moduleName = `day${String(day).padStart(2, "0")}.ts`;
+const moduleName = `day${String(args.day).padStart(2, "0")}.ts`;
 
 const [input, module] = await Promise.all([
-  api.getInput(day),
+  api.getInput(args.day),
   import(`./src/${moduleName}`),
 ]);
+
+const part = args.part ?? "1";
 
 console.log(
   `Running ${bold(moduleName)} with part ${bold(String(part))}...`,
@@ -43,11 +40,16 @@ const output = await module.solve(input, part);
 console.log(bold("Got output:"));
 console.log(output);
 
-const solutionResponse = await api.sendSolution(
-  day,
-  part,
-  output,
-);
+const shouldCheck = args["auto-submit"] ||
+  confirm(bold(italic("Do you want to check the solution?")));
 
-console.log(bold("Got solution response:"));
-console.log(solutionResponse);
+if (shouldCheck) {
+  const solutionResponse = await api.sendSolution(
+    args.day,
+    part,
+    output,
+  );
+
+  console.log(bold("Got solution response:"));
+  console.log(solutionResponse);
+}
