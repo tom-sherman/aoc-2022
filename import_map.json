@@ -1,6 +1,7 @@
 {
   "imports": {
     "std/": "https://deno.land/std@0.166.0/",
-    "lib/": "./lib/"
+    "lib/": "./lib/",
+    "deno_dom/": "https://deno.land/x/deno_dom@v0.1.36-alpha/"
   }
 }
