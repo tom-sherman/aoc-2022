@@ -2,6 +2,7 @@
   "imports": {
     "std/": "https://deno.land/std@0.166.0/",
     "lib/": "./lib/",
-    "deno_dom/": "https://deno.land/x/deno_dom@v0.1.36-alpha/"
+    "deno_dom/": "https://deno.land/x/deno_dom@v0.1.36-alpha/",
+    "dotenv/": "https://deno.land/x/dotenv@v3.2.0/"
   }
 }

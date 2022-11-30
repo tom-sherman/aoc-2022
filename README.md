@@ -6,8 +6,12 @@ In Deno!
 
 Each solution is a module inside `src/` that exports a `solve` function of type `string => string | Promise<string>`.
 
-To run a solution, pass the module name (eg. `day01`) to the `solve` task, optionally include a part number (1 or 2) eg.
+You'll need a session token from [adventofcode.com](https://adventofcode.com/2022) to run the solutions. This is obtained from the `session` cookie after logging in.
+
+To run a solution, pass the day and part numbers to the `solve` script in the format `day:part`:
 
 ```
-deno task solve day01 1
+deno task solve 1:1
 ```
+
+> **Note:** If a puzzle doesn't have a second part, you can pass `1` for the part number.
