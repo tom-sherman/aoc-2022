@@ -1,7 +1,12 @@
 import { AocApi } from "lib/api.ts";
 import { bold, italic } from "std/fmt/colors.ts";
 import { config } from "dotenv/mod.ts";
-import { choice, Command, number as numberArgument } from "clay/mod.ts";
+import {
+  choice,
+  Command,
+  number as numberArgument,
+  string as stringArgument,
+} from "clay/mod.ts";
 
 const { AOC_TOKEN } = config();
 
@@ -11,6 +16,7 @@ if (!AOC_TOKEN) {
 }
 
 const cmd = new Command("Run Advent of Code solutions")
+  .optional(stringArgument, "year", { flags: ["year"] })
   .required(numberArgument, "day")
   .optional(choice<("1" | "2")[]>("PART", ["1", "2"]), "part")
   .flag("auto-submit", { aliases: ["submit"] });
@@ -18,7 +24,7 @@ const cmd = new Command("Run Advent of Code solutions")
 const args = cmd.run();
 
 const api = new AocApi(
-  "https://adventofcode.com/2020/",
+  `https://adventofcode.com/${args.year ?? "2022"}/`,
   AOC_TOKEN,
 );
 
