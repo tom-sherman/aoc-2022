@@ -41,7 +41,15 @@ console.log(
   `Running ${bold(moduleName)} with part ${bold(String(part))}...`,
 );
 
-const output = await module.solve(input, part);
+let output;
+switch (part) {
+  case "1":
+    output = await module.solvePart1(input);
+    break;
+  case "2":
+    output = await module.solvePart2(input);
+    break;
+}
 
 console.log(bold("Got output:"));
 console.log(output);

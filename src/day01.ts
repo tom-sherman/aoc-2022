@@ -1,17 +1,8 @@
-export function solve(input: string, part: string) {
-  switch (part) {
-    case "1":
-      return solvePart1(input);
-    case "2":
-      return solvePart2(input);
-  }
-}
-
-function solvePart1(input: string) {
+export function solvePart1(input: string) {
   return parseElveTotalCalories(input)[0];
 }
 
-function solvePart2(input: string) {
+export function solvePart2(input: string) {
   return parseElveTotalCalories(input).slice(0, 3).reduce((a, b) => a + b, 0);
 }
 
