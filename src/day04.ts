@@ -13,19 +13,24 @@ export function solvePart2(input: string) {
   return sectionPairs.filter(([a, b]) => intersection(a, b).size > 0).length;
 }
 
+const lineRegex = /(?<aStart>\d+)-(?<aEnd>\d+),(?<bStart>\d+)-(?<bEnd>\d+)/;
+
 function parseInput(input: string) {
   return input.trim().split("\n").map((line) => {
-    const [aSection, bSection] = line.split(",");
+    const matches = line.match(lineRegex);
+    if (matches === null) {
+      throw new Error(`Invalid line: ${line}`);
+    }
 
-    return [rangeFromString(aSection!), rangeFromString(bSection!)] as const;
+    const { aStart, aEnd, bStart, bEnd } = matches.groups!;
+
+    return [
+      setRange(parseInt(aStart!), parseInt(aEnd!)),
+      setRange(parseInt(bStart!), parseInt(bEnd!)),
+    ] as const;
   });
 }
 
-function rangeFromString(rangeString: string) {
-  const [start, end] = rangeString.split("-").map(Number);
-  if (start === undefined || end === undefined || isNaN(start) || isNaN(end)) {
-    throw new Error(`Invalid range string: ${rangeString}`);
-  }
-
+function setRange(start: number, end: number) {
   return new Set([...Array(end - start + 1)].map((_, i) => i + start));
 }
