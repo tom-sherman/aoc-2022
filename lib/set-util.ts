@@ -31,3 +31,13 @@ export function head<T>(set: Set<T>) {
 
   return result.done ? undefined : result.value;
 }
+
+export function isSuperSet<T>(set: Set<T>, subset: Set<T>) {
+  for (const elem of subset) {
+    if (!set.has(elem)) {
+      return false;
+    }
+  }
+
+  return true;
+}
