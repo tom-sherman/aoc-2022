@@ -1,4 +1,4 @@
-import { entries } from "../lib/iter-util.ts";
+import { entries } from "lib/iter-util.ts";
 
 export function solvePart1(input: string) {
   const buffer = [...input.trim()];
