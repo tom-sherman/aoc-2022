@@ -149,10 +149,6 @@ class FileSystem {
     return this.#root;
   }
 
-  setCurrentDirectory(directory: Directory) {
-    this.#currentDirectory = directory;
-  }
-
   changeDirectory(path: string) {
     if (path === "..") {
       this.changeDirectoryUp();
